@@ -1,0 +1,15 @@
+# Node.js
+node_modules/
+npm-debug.log
+
+# System
+Thumbs.db
+Desktop.ini
+
+# IDE
+.vscode/
+.idea/
+
+# Artifacts
+capture.png
+capture.json
