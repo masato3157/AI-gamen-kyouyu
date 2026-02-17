@@ -9,11 +9,18 @@
 
 ## インストール方法
 
-### 1. リポジトリのクローン
+### 1. リポジトリの取得
+
+#### 方法A: Gitを使う（推奨）
 ```bash
 git clone https://github.com/masato3157/AI-gamen-kyouyu.git
 cd AI-gamen-kyouyu
 ```
+
+#### 方法B: ZIPでダウンロード
+1.  ページ右上の緑色の **[<> Code]** ボタンをクリックします。
+2.  **[Download ZIP]** を選択します。
+3.  ダウンロードしたZIPファイルを解凍します。
 
 ### 2. 連携プログラムの登録 (Windows)
 Antigravityへの直接送信機能を使う場合のみ必要です。
