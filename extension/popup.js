@@ -24,25 +24,6 @@ async function copyToClipboard(dataUrl) {
     }
 }
 
-// ユーティリティ: 指定URLのタブを探して切り替える、なければ新規作成
-async function openOrSwitchTab(targetUrl, urlPattern) {
-    // urlPattern に一致するタブを探す (例: *://gemini.google.com/*)
-    const tabs = await chrome.tabs.query({ url: urlPattern });
-
-    if (tabs.length > 0) {
-        // 見つかったら、そのタブをアクティブにする
-        const tab = tabs[0];
-        await chrome.tabs.update(tab.id, { active: true });
-        // そのウィンドウもフォーカスする
-        await chrome.windows.update(tab.windowId, { focused: true });
-    } else {
-        // 見つからなければ、新しいタブで開く
-        await chrome.tabs.create({ url: targetUrl });
-    }
-}
-
-// --- ボタンごとの処理 ---
-
 // 1. Antigravity へ送る (既存機能)
 document.getElementById('btnAntigravity').addEventListener('click', async () => {
     const btn = document.getElementById('btnAntigravity');
@@ -81,23 +62,10 @@ document.getElementById('btnAntigravity').addEventListener('click', async () => 
     }
 });
 
-// 2. ChatGPT へ送る
-document.getElementById('btnChatGPT').addEventListener('click', async () => {
-    await handleAiServiceClick('https://chatgpt.com/', '*://chatgpt.com/*');
-});
-
-// 3. Gemini へ送る
-document.getElementById('btnGemini').addEventListener('click', async () => {
-    await handleAiServiceClick('https://gemini.google.com/app', '*://gemini.google.com/*');
-});
-
-// 4. Claude へ送る
-document.getElementById('btnClaude').addEventListener('click', async () => {
-    await handleAiServiceClick('https://claude.ai/new', '*://claude.ai/*');
-});
-
-// 共通ハンドラ: AIサービス向け (撮影 -> コピー -> タブ切替)
-async function handleAiServiceClick(targetUrl, urlPattern) {
+// 2. スクリーンショットをコピー
+document.getElementById('btnCopy').addEventListener('click', async () => {
+    const btn = document.getElementById('btnCopy');
+    btn.disabled = true;
     showStatus('コピー中...', '');
 
     try {
@@ -106,19 +74,17 @@ async function handleAiServiceClick(targetUrl, urlPattern) {
 
         // クリップボードへコピー
         const success = await copyToClipboard(dataUrl);
-        if (!success) {
+
+        if (success) {
+            showStatus('コピーしました！', 'success');
+            // ユーザーへのフィードバック時間を確保してから閉じる
+            setTimeout(() => window.close(), 1000);
+        } else {
             throw new Error('クリップボードへのコピーに失敗しました');
         }
 
-        showStatus('コピー完了！ タブを開きます...', 'success');
-
-        // タブ切り替えまたは新規作成
-        await openOrSwitchTab(targetUrl, urlPattern);
-
-        // ポップアップを閉じる (UX向上のため)
-        // window.close(); 
-
     } catch (err) {
         showStatus('エラー: ' + err.message, 'error');
+        btn.disabled = false;
     }
-}
+});
