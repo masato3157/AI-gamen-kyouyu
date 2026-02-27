@@ -1,7 +1,7 @@
 {
     "manifest_version": 3,
     "name": "AI-gamen-kyouyu",
-    "version": "0.1",
+    "version": "0.1.1",
     "description": "Send browser screenshots to AI services (Antigravity, ChatGPT, Gemini, Claude).",
     "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxyHU8Vd9tGiKBILALGu5XrEIScOA+yfwwsmQYF0KDBNCZlH3ucmG9BahgswyUBAPFvD+HxyO51jM0gTn3w3ymaD0OKYOL8BYcZqbkVodCM+wfNh0FOqRBfDsGzenuYCa1Ii5f8Wm8bZtMUJWyiiQJiSTJnbsZmrprSWt7TX0A5xKT8xsNPeru5iht/POVK18um3jerSbXg+Mz4SlfSR63qgtoHHzXBBXtW4mXvRJAKQBMtIi8xekDz9CfATFHMG7rHrZCRgQfi/GeHmwfSH1sIb+VslgzjVEbfMgZTjnCLBYPSSfyILVLOSrG2Mp3oIFthGgYl+KpnoP9P0gWw7O8wIDAQAB",
     "permissions": [

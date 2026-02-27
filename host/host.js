@@ -99,6 +99,11 @@ process.stdin.on('data', (chunk) => {
 function handleMessage(msg) {
     if (msg.image) {
         try {
+            // 保存先フォルダがなければ自動作成（別PCでも動くように）
+            if (!fs.existsSync(TARGET_DIR)) {
+                fs.mkdirSync(TARGET_DIR, { recursive: true });
+            }
+
             // Remove header "data:image/png;base64,"
             const base64Data = msg.image.replace(/^data:image\/png;base64,/, "");
             
